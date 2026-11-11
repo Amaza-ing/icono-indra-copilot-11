@@ -66,3 +66,9 @@ if (prefersReducedMotion || !("IntersectionObserver" in window)) {
 
   revealItems.forEach((item) => revealObserver.observe(item));
 }
+
+
+
+
+
+

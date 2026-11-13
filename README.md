@@ -32,6 +32,11 @@ mi-web/
 ├── styles.css
 ├── script.js
 ├── .github/
+│   ├── agents/
+│   │   ├── web-lead.agent.md
+│   │   ├── ux-ui.agent.md
+│   │   ├── front-end.agent.md
+│   │   └── code-review.agent.md
 │   └── copilot-instructions.md
 └── README.md
 ```
@@ -58,6 +63,30 @@ http://localhost:8000
 ```
 
 También puedes usar extensiones como Live Server en VS Code para visualizar cambios en tiempo real.
+
+## Agentes de GitHub Copilot en VS Code
+
+Los archivos de `.github/agents/` están configurados para sesiones **Copilot**, con `target: github-copilot`. Abre esta carpeta como proyecto, inicia un chat nuevo con Copilot y selecciona `web-lead` en el selector de agentes.
+
+`web-lead` puede leer, buscar y editar archivos, y delegar en los especialistas. `ux-ui` propone el diseño, `front-end` aplica los cambios y `code-review` revisa el resultado. Los tres especialistas usan `user-invocable: false`: quedan ocultos en el selector, pero el coordinador puede invocarlos como subagentes.
+
+Para comprobar el acceso a los archivos sin modificar la web, pide:
+
+```text
+Lee index.html y styles.css con tus herramientas. Dime qué clase tiene
+la cabecera y qué reglas CSS la afectan. No modifiques ningún archivo.
+```
+
+Comprueba que la actividad del chat muestra lecturas reales y que la respuesta coincide con el código. Después puedes pedir a `web-lead` que mejore la cabecera y aplique los cambios en los archivos.
+
+Si responde que no puede acceder al proyecto:
+
+1. Comprueba que la sesión usa Copilot y está asociada a esta carpeta. Adjuntar un `.agent.md` como contexto no sustituye a seleccionar el agente.
+2. Abre **Chat: Open Customizations** y revisa que los cuatro agentes aparecen sin errores. En **Tools**, comprueba las capacidades disponibles; `web-lead` necesita `read`, `search`, `edit` y `agent`.
+3. Tras modificar los agentes, inicia un chat nuevo. Si los cambios no aparecen, ejecuta **Developer: Reload Window** y vuelve a seleccionar `web-lead`.
+4. Si falla una herramienta, revisa el error de esa llamada y los permisos que solicite. Para aislar el problema, repite la prueba de lectura con el agente integrado **Agent**: si también falla, el problema afecta a la sesión o al acceso al proyecto.
+
+La configuración anterior usaba `target: vscode`, grupos de herramientas propios de Local y un coordinador limitado a `tools: [agent]`. La configuración actual utiliza los alias de Copilot y define los encargos a los especialistas en las instrucciones. El campo `agents` de Local no se admite en el esquema de Copilot. Consulta la [referencia de agentes de VS Code](https://code.visualstudio.com/docs/agents/reference/custom-agent-file-reference) y la [guía de migración de herramientas](https://code.visualstudio.com/docs/agent-customization/migrate-customizations#why-does-an-agent-fail-with-a-tool-discovery-capability-error) para ampliar las herramientas.
 
 ## Personalización
 

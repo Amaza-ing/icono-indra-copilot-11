@@ -18,7 +18,7 @@ test('El HTML contiene la estructura principal', () => {
 
 // TEST 2: Secciones principales
 test('Existen las secciones principales', () => {
-  for (const id of ['inicio', 'proyectos', 'estudio', 'contacto']) {
+  for (const id of ['inicio', 'proyectos', 'estudio', 'esto-va-a-fallar']) {
     assert.match(html, new RegExp(`\\bid="${id}"`));
   }
 });

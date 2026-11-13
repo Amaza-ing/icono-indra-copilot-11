@@ -1,4 +1,4 @@
-# Norte Studio!!!!!!!!!!
+# Norte Studio
 
 Landing page estática y responsive para un estudio creativo independiente. El proyecto presenta una identidad visual minimalista, una narrativa clara para la marca y una estructura de una sola página pensada para comunicar servicios, proyectos recientes y contacto.
 
